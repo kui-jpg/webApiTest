@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using webApiTest.Model;
+using webApiTest.MyDataBaseContext;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,34 +10,33 @@ namespace webApiTest.Controllers
     [ApiController]
     public class ValuesController1 : ControllerBase
     {
+       
+      
         // GET: api/<ValuesController1>
         [HttpGet]
         public IEnumerable<student> Get()
         {
             return new student[] { new student() {
-             Id=1,
+             id=1,
             Name="Alan.hsiang",
-            Age=20,
-             Sex=true
+            Age=20
          }, new student() {
-            Id=2,
+            id=2,
             Name="Json.hsiang",
-            Age=18,
-            Sex=false
+            Age=18
          } };
         }
 
         // GET api/<ValuesController1>/5
         [Route("student/{id}")]
         [HttpGet]
-        public student Get(int id,string name)
+        public student Get(int id, string name)
         {
             return new student()
             {
-                Id = id,
-                Name =name,
-                Age = 20,
-                Sex = true
+                id = id,
+                Name = name,
+                Age = 20
             };
         }
 
@@ -65,7 +65,7 @@ namespace webApiTest.Controllers
         {
         }
 
-        
+
 
     }
 }

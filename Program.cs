@@ -1,5 +1,10 @@
 namespace webApiTest
 {
+    using MyDataBaseContext;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.SqlServer;
+    
+    using Model;
     public class Program
     {
         public static void Main(string[] args)
@@ -13,7 +18,14 @@ namespace webApiTest
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Logging.AddLog4Net("config/log4net.config");
+
+            builder.Services.AddDbContext<MyDataBaseContext_main>(options => {
+                options.UseMySql(builder.Configuration.GetConnectionString("MySqlDataBase"), new MySqlServerVersion(new Version(8, 0, 31)));
+            });
+
             var app = builder.Build();
+            app.UseCors("default");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -23,7 +35,8 @@ namespace webApiTest
             }
 
             app.UseHttpsRedirection();
-
+            app.UseDefaultFiles();
+            app.UseStaticFiles();   
             app.UseAuthorization();
 
 

@@ -65,14 +65,15 @@ namespace webApiTest.Controllers
         }
 
         /// <summary>
-        /// 
+        /// 根据输入参数查询
         /// </summary>
         /// <param name="Name"></param>
         /// <returns></returns>
         [HttpGet("{Name}")]
-        public async Task<ActionResult<student>> GetInfoByuserName(string Name)
+        public async Task<ActionResult<student>> GetInfoByuserName(string Name,int age)
         {
-            var tmaster = await _coreDbContext.student.Where(s=>s.Name==Name).FirstOrDefaultAsync();
+            var tmaster = await _coreDbContext.student.Where(s=>s.Name==Name && s.Age==age).FirstOrDefaultAsync();
+            
             if (tmaster == null)
             {
                 return NotFound();

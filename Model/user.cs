@@ -6,7 +6,7 @@ namespace webApiTest.Model
     {
         public int uuid { get; set; }
         public int userID { get; set; }  
-        public string userName { get; set; }    
-        public string address { get; set; }
+        public string ?userName { get; set; }    
+        public string ?address { get; set; }
     }
 }
